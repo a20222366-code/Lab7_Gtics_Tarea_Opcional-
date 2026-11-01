@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<h1>Clientes</h1>
+
+<p th:if="${error}" th:text="${error}" style="color:red"></p>
+
+<a th:href="@{/clientes/nuevo}">Registrar nuevo cliente</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Tipo de documento</th>
+        <th>Número de documento</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cliente : ${clientes}">
+        <td th:text="${cliente.id}"></td>
+        <td th:text="${cliente.name}"></td>
+        <td th:text="${cliente.documentType}"></td>
+        <td th:text="${cliente.document}"></td>
+        <td>
+            <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}">Editar</a>
+
+            <form th:action="@{/clientes/eliminar/{id}(id=${cliente.id})}"
+                  method="post" style="display:inline">
+                <button type="submit">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(clientes)}">
+        <td colspan="5">No hay clientes registrados.</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
