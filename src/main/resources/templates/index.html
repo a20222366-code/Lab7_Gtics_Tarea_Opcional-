@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Portal de gestión comercial</title>
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<h1>Portal de gestión comercial</h1>
+
+<p>Sistema interno de la distribuidora para mantener el catálogo de productos,
+    registrar clientes y emitir pedidos de venta.</p>
+
+<ul>
+    <li><a th:href="@{/clientes}">Clientes</a>: registro y edición de clientes (DNI o RUC).</li>
+    <li><a th:href="@{/productos}">Catálogo</a>: productos con su precio y stock.</li>
+    <li><a th:href="@{/comprobantes}">Pedidos</a>: facturas y boletas de venta.</li>
+</ul>
+
+</body>
+</html>
