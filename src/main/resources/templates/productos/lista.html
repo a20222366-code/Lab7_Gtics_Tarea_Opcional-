@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo</title>
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<h1>Catálogo de productos</h1>
+
+<p th:if="${error}" th:text="${error}" style="color:red"></p>
+
+<a th:href="@{/productos/nuevo}">Registrar producto</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="producto : ${productos}">
+        <td th:text="${producto.id}"></td>
+        <td th:text="${producto.name}"></td>
+        <td th:text="${producto.price}"></td>
+        <td th:text="${producto.stock}"></td>
+        <td>
+            <a th:href="@{/productos/editar/{id}(id=${producto.id})}">Editar</a>
+
+            <form th:action="@{/productos/eliminar/{id}(id=${producto.id})}"
+                  method="post" style="display:inline">
+                <button type="submit">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(productos)}">
+        <td colspan="5">No hay productos registrados.</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
